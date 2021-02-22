@@ -59,6 +59,8 @@ function promptUser() {
 
     .jumbotron { background-color: red; }
 
+    p { color: black;}
+
 </style>
 
   </head>
@@ -73,35 +75,31 @@ function promptUser() {
     <div class="card text-white mb-3" style="max-width: 18rem;">
         <div class="card-header bg-primary">${answers.name}</div>
         <div class="card-body bg-light">
-            <h5 class="card-title">Primary card title</h5>
+                <p>ID: ${answers.id}</p>
+                <p>Email: ${answers.email}</p>
+        </div>
+    </div>
+    <div class="card text-white mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-primary">${answers.name}</div>
+        <div class="card-body bg-light">
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
     </div>
     <div class="card text-white mb-3" style="max-width: 18rem;">
         <div class="card-header bg-primary">${answers.name}</div>
         <div class="card-body bg-light">
-            <h5 class="card-title">Primary card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
     </div>
     <div class="card text-white mb-3" style="max-width: 18rem;">
         <div class="card-header bg-primary">${answers.name}</div>
         <div class="card-body bg-light">
-            <h5 class="card-title">Primary card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
     </div>
     <div class="card text-white mb-3" style="max-width: 18rem;">
         <div class="card-header bg-primary">${answers.name}</div>
         <div class="card-body bg-light">
-            <h5 class="card-title">Primary card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
-    <div class="card text-white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary">${answers.name}</div>
-        <div class="card-body bg-light">
-            <h5 class="card-title">Primary card title</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
     </div>
