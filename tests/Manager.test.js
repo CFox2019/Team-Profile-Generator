@@ -15,7 +15,7 @@ describe("Manager", () => {
     });
 
     describe('getRole', () => {
-        it("should return a 'string' containing the employees 'role' provided at inizialization", () => {
+        it("should return a 'string' containing the employees 'role' provided at initialization", () => {
             expect(manager.getRole()).toEqual("Manager");
         });
     });
