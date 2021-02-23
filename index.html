@@ -13,6 +13,8 @@
 
     .jumbotron { background-color: red; }
 
+    #team-cards { border: 1px solid; box-shadow: 3px 5px #888888; }
+
     p { color: black;}
 
 </style>
@@ -20,43 +22,24 @@
   </head>
   <body>
 
+  <header>
     <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1>My Team</h1>
     </div>
     </div>
+  </header>
 
-    <div class="card text-white mb-3" style="max-width: 18rem;">
+  <main>
+    <div id="team-cards" class="card text-white mb-3" style="max-width: 18rem;">
         <div class="card-header bg-primary">Courtney</div>
         <div class="card-body bg-light">
                 <p>ID: 1</p>
                 <p>Email: courtney@test.com</p>
+                <p>Office Number: 7703456789</p>
         </div>
     </div>
-    <div class="card text-white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary">Courtney</div>
-        <div class="card-body bg-light">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
-    <div class="card text-white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary">Courtney</div>
-        <div class="card-body bg-light">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
-    <div class="card text-white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary">Courtney</div>
-        <div class="card-body bg-light">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
-    <div class="card text-white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary">Courtney</div>
-        <div class="card-body bg-light">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
+  </main>
 
   </body>
   </html>
