@@ -1,3 +1,4 @@
+// requirements
 const inquirer = require("inquirer");
 const util = require("util");
 const fs = require("fs");
@@ -5,12 +6,14 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+// variables
 let addingEmployeeType = null;
 let manager = null;
 const employees = [];
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
+// Initial questions for team manager to answer
 const promptManager = () => {
   return inquirer.prompt([
     {
@@ -36,6 +39,7 @@ const promptManager = () => {
   ]);
 }
 
+// questions for entering 'Engineer' information
 const promptEngineer = () => {
   return inquirer.prompt([
     {
@@ -61,6 +65,7 @@ const promptEngineer = () => {
   ]);
 }
 
+// questions for entering 'Intern' information
 const promptIntern = () => {
   return inquirer.prompt([
     {
@@ -86,6 +91,7 @@ const promptIntern = () => {
   ]);
 }
 
+// prompt for asking the manager what employee type they would like to enter information for
 const promptEmployeeType = () => {
   return inquirer.prompt([
     {
@@ -97,6 +103,7 @@ const promptEmployeeType = () => {
   ]);
 }
 
+// prompt for choosing between 'Engineer' or 'Intern'
 const promptEmployee = (type) => {
   if (type === "Engineer") {
     return promptEngineer()
@@ -105,6 +112,7 @@ const promptEmployee = (type) => {
   }
 }
 
+// prompt for asking the manager if they have more employees to add
 const promptAddMore = () => {
   return inquirer.prompt([
     {
@@ -115,6 +123,7 @@ const promptAddMore = () => {
   ]);
 }
 
+// function that creates the flow for adding the employee type or adding an additional employee
 const employeeEntryFlow = () => {
   addingEmployeeType = null;
   return promptEmployeeType()
@@ -139,7 +148,8 @@ const employeeEntryFlow = () => {
     });
 }
 
-const generateHTML = (answers) => {
+// generates the HTML file for the prompted quuestions answers and adds the answers to individual cards (file also includes styles)
+const generateHTML = () => {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -151,7 +161,7 @@ const generateHTML = (answers) => {
 
 <style>
 
-    h1 { text-align: center; color: white; }
+    header { text-align: center; color: white; }
 
     .jumbotron { background-color: red; }
 
@@ -173,20 +183,58 @@ const generateHTML = (answers) => {
   </header>
 
   <main>
-    <div id="team-cards" class="card text-white mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-primary">${answers.managerName}</div>
-        <div class="card-body bg-light">
-                <p>ID: ${answers.managerId}</p>
-                <p>Email: ${answers.managerEmail}</p>
-                <p>Office Number: ${answers.officeNumber}</p>
-        </div>
-    </div>
+    ${appendManager()}
+
+    ${appendEmployees()}
   </main>
 
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
   </body>
   </html>`;
 }
 
+const appendManager = () => {
+  return `
+  <div id="team-cards" class="card text-white mb-3" style="max-width: 18rem;">
+      <div class="card-header bg-primary">
+      <h1>${manager.getName()}</h1>
+      <h3>${manager.getRole()}</h3>
+      </div>
+      <div class="card-body bg-light">
+              <p>ID: ${manager.getId()}</p>
+              <p>Email: ${manager.getEmail()}</p>
+              <p>Office Number: ${manager.getOfficeNumber()}</p>
+      </div>
+  </div>
+  `
+}
+
+const appendEmployees = () => {
+  let htmlString = ""
+  employees.forEach((employee) => {
+    htmlString += `
+    <div id="team-cards" class="card text-white mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-primary">
+        <h1>${employee.getName()}</h1>
+        <h3>${employee.getRole()}
+        </div>
+        <div class="card-body bg-light">
+                <p>ID: ${employee.getId()}</p>
+                <p>Email: ${employee.getEmail()}</p>
+                ${employee.getRole() === "Engineer" ? "<p>GitHub: " + employee.getGithub() + "</p>" : ""}
+                ${employee.getRole() === "Intern" ? "<p>School: " + employee.getSchool() + "</p>" : ""}
+        </div>
+    </div>
+    `
+  })
+
+  console.log('html string', htmlString);
+  return htmlString;
+}
+
+// answers for the manager's questions
 promptManager()
   .then((managerAnswers) => {
       manager = new Manager(
@@ -196,13 +244,13 @@ promptManager()
           managerAnswers.officeNumber
       )
   })
+  // function that creates the flow of questions for the manager
   .then(() => employeeEntryFlow())
   .then(() => {
     console.log("manager", manager);
     console.log("employees", employees);
-    // const html = generateHTML(answers);
-
-    // return writeFileAsync("index.html", html);
+    const html = generateHTML();
+    return writeFileAsync("index.html", html);
   })
   .then(() => {
     console.log("Successfully wrote to index.html");
