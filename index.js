@@ -161,13 +161,26 @@ const generateHTML = () => {
 
 <style>
 
-    header { text-align: center; color: white; }
+    header {
+      text-align: center;
+      color: white;
+    }
 
-    .jumbotron { background-color: red; }
+    .jumbotron {
+      background-color: red;
+    }
 
-    #team-cards { border: 1px solid; box-shadow: 3px 5px #888888; }
+    #team-cards {
+      margin: 10px;
+      width: 350px;
+      border: 1px solid;
+      box-shadow: 3px 5px #888888;
+      flex-wrap: wrap;
+    }
 
-    p { color: black;}
+    p {
+      color: black;
+    }
 
 </style>
 
@@ -183,9 +196,13 @@ const generateHTML = () => {
   </header>
 
   <main>
-    ${appendManager()}
+    <div class="container">
+      <div class="row justify-content-center">
+        ${appendManager()}
 
-    ${appendEmployees()}
+        ${appendEmployees()}
+      </div>
+    </div>
   </main>
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
