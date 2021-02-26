@@ -157,10 +157,13 @@ const generateHTML = () => {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.2/js/all.js"
+      data-auto-a11y="true">
+    </script>
     <title>Team Profile</title>
 
 <style>
-
     header {
       text-align: center;
       color: white;
@@ -178,13 +181,13 @@ const generateHTML = () => {
       flex-wrap: wrap;
     }
 
-    p {
+    li {
       color: black;
     }
 
 </style>
-
   </head>
+
   <body>
 
   <header>
@@ -199,7 +202,6 @@ const generateHTML = () => {
     <div class="container">
       <div class="row justify-content-center">
         ${appendManager()}
-
         ${appendEmployees()}
       </div>
     </div>
@@ -217,12 +219,14 @@ const appendManager = () => {
   <div id="team-cards" class="card text-white mb-3" style="max-width: 18rem;">
       <div class="card-header bg-primary">
       <h1>${manager.getName()}</h1>
-      <h3>${manager.getRole()}</h3>
+      <h3><i class="fas fa-mug-hot"></i> ${manager.getRole()}</h3>
       </div>
       <div class="card-body bg-light">
-              <p>ID: ${manager.getId()}</p>
-              <p>Email: ${manager.getEmail()}</p>
-              <p>Office Number: ${manager.getOfficeNumber()}</p>
+        <ul class="list-group">
+              <li class="list-group-item">ID: ${manager.getId()}</li>
+              <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
+              <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
+        </ul>
       </div>
   </div>
   `
@@ -235,13 +239,17 @@ const appendEmployees = () => {
     <div id="team-cards" class="card text-white mb-3" style="max-width: 18rem;">
         <div class="card-header bg-primary">
         <h1>${employee.getName()}</h1>
-        <h3>${employee.getRole()}
+        <h3>${employee.getRole() === "Engineer" ? `<i class="fas fa-glasses"></i>` : ""}
+        ${employee.getRole() === "Intern" ? `<i class="fas fa-user-graduate"></i>` : ""}
+        ${employee.getRole()}</h3>
         </div>
         <div class="card-body bg-light">
-                <p>ID: ${employee.getId()}</p>
-                <p>Email: ${employee.getEmail()}</p>
-                ${employee.getRole() === "Engineer" ? "<p>GitHub: " + employee.getGithub() + "</p>" : ""}
-                ${employee.getRole() === "Intern" ? "<p>School: " + employee.getSchool() + "</p>" : ""}
+          <ul class="list-group">
+                <li class="list-group-item">ID: ${employee.getId()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
+                ${employee.getRole() === "Engineer" ? "<li class=\"list-group-item\"> GitHub: " + `<a href="https://github.com/" + ${employee.getGithub()} + >${employee.getGithub()}</a>` + "</li>" : ""}
+                ${employee.getRole() === "Intern" ? "<li class=\"list-group-item\"> School: " + employee.getSchool() + "</li>" : ""}
+          </ul>
         </div>
     </div>
     `
