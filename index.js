@@ -276,7 +276,7 @@ promptManager()
     console.log("manager", manager);
     console.log("employees", employees);
     const html = generateHTML();
-    return writeFileAsync("index.html", html);
+    return writeFileAsync("dist/index.html", html);
   })
   .then(() => {
     console.log("Successfully wrote to index.html");
