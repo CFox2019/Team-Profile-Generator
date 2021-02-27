@@ -123,7 +123,8 @@ const promptAddMore = () => {
   ]);
 }
 
-// function that creates the flow for adding the employee type or adding an additional employee
+// A recursive function, asking the user if they would like to add more employees, in addition to the type of employee.
+// This will only stop when the user chooses 'n' for no
 const employeeEntryFlow = () => {
   addingEmployeeType = null;
   return promptEmployeeType()
@@ -148,7 +149,7 @@ const employeeEntryFlow = () => {
     });
 }
 
-// generates the HTML file for the prompted quuestions answers and adds the answers to individual cards (file also includes styles)
+// generates the HTML file for the prompted question's answers and adds the answers to individual cards (file also includes styles)
 const generateHTML = () => {
   return `
   <!DOCTYPE html>
